@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="color-scheme" content="light" />
+  <title>職涯性向與工作價值觀測驗</title>
+  <style>
+    :root {
+      --bg: #f5f7fb;
+      --card: #ffffff;
+      --text: #172033;
+      --muted: #667085;
+      --line: #e4e7ec;
+      --primary: #3157d5;
+      --primary-dark: #2445b5;
+      --soft: #eef3ff;
+      --danger: #b42318;
+      --danger-bg: #fef3f2;
+      --shadow: 0 12px 32px rgba(23, 32, 51, 0.08);
+      --radius: 18px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: linear-gradient(180deg, #eef3ff 0, var(--bg) 240px);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
+      line-height: 1.6;
+    }
+
+    button, input { font: inherit; }
+    button { cursor: pointer; }
+
+    .app {
+      width: min(920px, calc(100% - 28px));
+      margin: 0 auto;
+      padding: 28px 0 48px;
+    }
+
+    .hero {
+      margin-bottom: 18px;
+      padding: 18px 4px 4px;
+    }
+    .hero h1 {
+      margin: 0 0 6px;
+      font-size: clamp(1.65rem, 4vw, 2.35rem);
+      line-height: 1.25;
+      letter-spacing: -0.02em;
+    }
+    .hero p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.98rem;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid rgba(228, 231, 236, 0.85);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: clamp(20px, 4vw, 34px);
+    }
+
+    .hidden { display: none !important; }
+
+    .intro-grid {
+      display: grid;
+      gap: 20px;
+    }
+    .intro-note {
+      padding: 14px 16px;
+      border-radius: 12px;
+      background: var(--soft);
+      color: #344054;
+      font-size: 0.95rem;
+    }
+    .field label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 700;
+    }
+    .field input {
+      width: 100%;
+      border: 1px solid #cfd4dc;
+      border-radius: 12px;
+      padding: 13px 14px;
+      outline: none;
+      transition: border-color .2s, box-shadow .2s;
+      background: #fff;
+    }
+    .field input:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 4px rgba(49, 87, 213, 0.12);
+    }
+
+    .btn {
+      border: 0;
+      border-radius: 12px;
+      padding: 12px 18px;
+      font-weight: 700;
+      transition: transform .05s ease, background .2s ease, opacity .2s ease;
+    }
+    .btn:active { transform: translateY(1px); }
+    .btn-primary {
+      background: var(--primary);
+      color: #fff;
+    }
+    .btn-primary:hover { background: var(--primary-dark); }
+    .btn-secondary {
+      background: #f2f4f7;
+      color: #344054;
+    }
+    .btn-secondary:hover { background: #e8ebf0; }
+    .btn:disabled {
+      opacity: .45;
+      cursor: not-allowed;
+    }
+
+    .quiz-top {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      margin-bottom: 16px;
+      padding: 12px 0 8px;
+      background: linear-gradient(180deg, rgba(245,247,251,.97) 78%, rgba(245,247,251,0));
+      backdrop-filter: blur(4px);
+    }
+    .progress-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 8px;
+      color: #475467;
+      font-size: .92rem;
+      font-weight: 650;
+    }
+    .progress-track {
+      height: 10px;
+      background: #e9edf4;
+      border-radius: 999px;
+      overflow: hidden;
+    }
+    .progress-bar {
+      height: 100%;
+      width: 0;
+      background: linear-gradient(90deg, #3157d5, #6384ef);
+      border-radius: inherit;
+      transition: width .25s ease;
+    }
+
+    .scale-legend {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 6px;
+      margin: 0 0 14px;
+      color: var(--muted);
+      font-size: .78rem;
+      text-align: center;
+    }
+
+    .question-list {
+      display: grid;
+      gap: 14px;
+    }
+    .question {
+      border: 1px solid var(--line);
+      border-radius: 15px;
+      padding: 18px;
+      background: #fff;
+      transition: border-color .2s, box-shadow .2s, background .2s;
+    }
+    .question.unanswered {
+      border-color: #fda29b;
+      background: #fffafa;
+      box-shadow: 0 0 0 3px rgba(240, 68, 56, .07);
+    }
+    .q-title {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      margin-bottom: 14px;
+      font-weight: 700;
+    }
+    .q-id {
+      flex: 0 0 auto;
+      color: var(--primary);
+      font-size: .82rem;
+      padding: 2px 8px;
+      border-radius: 999px;
+      background: var(--soft);
+      margin-top: 1px;
+    }
+    .q-text { flex: 1; }
+
+    .likert {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 8px;
+    }
+    .option {
+      position: relative;
+    }
+    .option input {
+      position: absolute;
+      opacity: 0;
+      pointer-events: none;
+    }
+    .option label {
+      display: flex;
+      min-height: 46px;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid #d0d5dd;
+      border-radius: 11px;
+      background: #fff;
+      color: #475467;
+      font-weight: 750;
+      user-select: none;
+      transition: border-color .15s, background .15s, color .15s, transform .05s;
+    }
+    .option label:hover {
+      border-color: #98a2b3;
+      background: #f9fafb;
+    }
+    .option input:checked + label {
+      border-color: var(--primary);
+      background: var(--soft);
+      color: var(--primary);
+      box-shadow: inset 0 0 0 1px var(--primary);
+    }
+    .option input:focus-visible + label {
+      outline: 3px solid rgba(49,87,213,.22);
+      outline-offset: 2px;
+    }
+
+    .message {
+      margin: 16px 0 0;
+      border-radius: 12px;
+      padding: 12px 14px;
+      background: var(--danger-bg);
+      color: var(--danger);
+      font-weight: 650;
+      display: none;
+    }
+    .message.show { display: block; }
+
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      margin-top: 18px;
+    }
+    .nav .btn { min-width: 118px; }
+
+    .complete {
+      text-align: center;
+      padding: 16px 0 4px;
+    }
+    .complete h2 {
+      margin: 0 0 12px;
+      font-size: 1.8rem;
+    }
+    .complete p {
+      margin: 0 auto 24px;
+      max-width: 620px;
+      color: var(--muted);
+    }
+    .complete-actions {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    @media (max-width: 640px) {
+      .app { width: min(100% - 18px, 920px); padding-top: 16px; }
+      .hero { padding-inline: 4px; }
+      .card { padding: 16px; border-radius: 15px; }
+      .question { padding: 15px; }
+      .q-title { gap: 8px; }
+      .scale-legend { font-size: .70rem; gap: 2px; }
+      .likert { gap: 6px; }
+      .option label { min-height: 44px; border-radius: 10px; }
+      .nav { position: sticky; bottom: 0; padding: 12px 0 4px; background: linear-gradient(0deg, rgba(255,255,255,.98) 76%, rgba(255,255,255,0)); }
+      .nav .btn { flex: 1; min-width: 0; }
+    }
+  </style>
+</head>
+<body>
+  <main class="app">
+    <header class="hero">
+      <h1>職涯性向與工作價值觀測驗</h1>
+      <p>共 60 題，每題請選擇最符合你目前狀態的程度。</p>
+    </header>
+
+    <section id="introView" class="card">
+      <div class="intro-grid">
+        <div class="intro-note">本頁只記錄你的作答並匯出 JSON，不會在網頁中分析職業或產生職涯推薦。</div>
+        <div class="field">
+          <label for="nameInput">姓名／暱稱</label>
+          <input id="nameInput" type="text" maxlength="80" autocomplete="name" placeholder="請輸入姓名或暱稱" />
+        </div>
+        <button id="startBtn" class="btn btn-primary" type="button">開始測驗</button>
+        <div id="introMessage" class="message" role="alert"></div>
+      </div>
+    </section>
+
+    <section id="quizView" class="hidden">
+      <div class="quiz-top">
+        <div class="progress-row">
+          <span id="pageText">第 1 / 10 頁</span>
+          <span id="progressText">已完成 0 / 60</span>
+        </div>
+        <div class="progress-track" aria-label="作答進度">
+          <div id="progressBar" class="progress-bar"></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="scale-legend" aria-hidden="true">
+          <span>1<br>非常不同意</span>
+          <span>2<br>不同意</span>
+          <span>3<br>普通／不確定</span>
+          <span>4<br>同意</span>
+          <span>5<br>非常同意</span>
+        </div>
+        <div id="questionList" class="question-list"></div>
+        <div id="quizMessage" class="message" role="alert"></div>
+        <div class="nav">
+          <button id="prevBtn" class="btn btn-secondary" type="button">上一頁</button>
+          <button id="nextBtn" class="btn btn-primary" type="button">下一頁</button>
+        </div>
+      </div>
+    </section>
+
+    <section id="completeView" class="card hidden">
+      <div class="complete">
+        <h2>測驗完成</h2>
+        <p>請下載 JSON，並將 JSON 上傳至指定的 AI 職涯分析工具進行分析。</p>
+        <div class="complete-actions">
+          <button id="downloadBtn" class="btn btn-primary" type="button">下載作答 JSON</button>
+          <button id="restartBtn" class="btn btn-secondary" type="button">重新開始</button>
+        </div>
+        <div id="completeMessage" class="message" role="alert"></div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    (() => {
+      "use strict";
+
+      const SCHEMA_VERSION = "career-response-1.0";
+      const QUESTIONNAIRE_ID = "career-fit-test";
+      const QUESTIONNAIRE_VERSION = "1.0.0";
+      const LANGUAGE = "zh-TW";
+      const STORAGE_KEY = "career-fit-test-state";
+      const PAGE_SIZE = 6;
+
+      const SCALE = {
+        min: 1,
+        max: 5,
+        labels: {
+          "1": "非常不同意",
+          "2": "不同意",
+          "3": "普通／不確定",
+          "4": "同意",
+          "5": "非常同意"
+        }
+      };
+
+      const QUESTIONS = [
+        { id: "Q001", text: "面對複雜問題時，我通常會先把它拆成幾個較小的部分。" },
+        { id: "Q002", text: "比起完全規劃好再開始，我比較習慣先做出一個版本，再依實際狀況調整。" },
+        { id: "Q003", text: "資訊很多時，我會想先整理出分類或結構，再決定下一步。" },
+        { id: "Q004", text: "即使目標還有些模糊，我也能先往前做，邊做邊釐清方向。" },
+        { id: "Q005", text: "有一段不被打斷的時間讓我專心處理同一件事，會比頻繁切換任務更舒服。" },
+        { id: "Q006", text: "當想法還不成熟時，我常透過和別人討論來把自己的思路整理清楚。" },
+        { id: "Q007", text: "如果規則和判斷標準寫得很清楚，我通常會更容易進入工作狀態。" },
+        { id: "Q008", text: "比起照既定做法執行，我更喜歡自己決定完成事情的方法。" },
+        { id: "Q009", text: "工作內容大致可預期、節奏固定，會讓我比較安心。" },
+        { id: "Q010", text: "如果長時間用同一套方式做事，我通常會開始想嘗試新的做法。" },
+        { id: "Q011", text: "我很容易注意到格式、數字、步驟或細節上的小差異。" },
+        { id: "Q012", text: "比起每個細節都先確認，我通常更想先掌握整件事的大方向。" },
+        { id: "Q013", text: "需要做判斷時，我比較放心有具體資料、紀錄或可驗證的依據。" },
+        { id: "Q014", text: "即使資料不完整，我也常能依整體感覺先形成一個方向。" },
+        { id: "Q015", text: "在時間有限的情況下，我通常可以接受先做出足夠好的決定，而不是等到資訊齊全。" },
+        { id: "Q016", text: "如果事情影響很大，我寧願多花時間比較幾種可能，再做決定。" },
+        { id: "Q017", text: "和不熟的人說明想法、爭取認同，通常不會讓我覺得特別消耗。" },
+        { id: "Q018", text: "當別人描述困難時，我會自然注意他當下的感受，而不只是事情本身。" },
+        { id: "Q019", text: "意見不一致時，我傾向把差異直接說清楚，而不是先避開衝突。" },
+        { id: "Q020", text: "即使我有不同看法，只要不影響關鍵結果，我有時會選擇保留而不爭論。" },
+        { id: "Q021", text: "在多人合作時，如果沒有人帶頭，我常會自然開始分配或推動下一步。" },
+        { id: "Q022", text: "在團隊裡，我通常更享受把自己的部分做好並支援別人，而不是主導整體方向。" },
+        { id: "Q023", text: "如果一件事最後要由我負責成果，我反而會更有投入感。" },
+        { id: "Q024", text: "比起事先承諾固定完成方式，我更希望保留依情況調整方法的空間。" },
+        { id: "Q025", text: "看到一件拖很久的事情終於收尾，通常比開始一件全新的事情更有滿足感。" },
+        { id: "Q026", text: "剛接觸一個新主題時，我常會忍不住延伸去看原本沒有要求的相關內容。" },
+        { id: "Q027", text: "我可以花很長一段時間反覆處理同一個難題，而不急著換別的事情。" },
+        { id: "Q028", text: "同時有幾件不同性質的事情交替進行，通常比整天只做同一件事更適合我。" },
+        { id: "Q029", text: "需要表達複雜內容時，我通常更喜歡先整理成文字，再讓別人閱讀。" },
+        { id: "Q030", text: "即使沒有事先準備，我通常也能在對話中邊想邊把重點說清楚。" },
+        { id: "Q031", text: "開始一項較大的任務前，我會想先排出階段、順序或時間點。" },
+        { id: "Q032", text: "原本的安排突然被打亂時，我通常能很快改變做法，不太需要重新適應。" },
+        { id: "Q033", text: "如果一個流程會重複很多次，我會想把步驟固定下來，減少每次重新判斷。" },
+        { id: "Q034", text: "即使處理的是相似情況，我也傾向依當下對象或條件調整做法，而不是完全照標準流程。" },
+        { id: "Q035", text: "只要潛在收穫夠大，我可以接受結果存在一定程度的不確定性。" },
+        { id: "Q036", text: "在兩個條件相近的選擇中，我通常會偏向風險較可預期的那一個。" },
+        { id: "Q037", text: "即使沒有明顯獎勵，只要我感覺自己的能力正在變強，就會有成就感。" },
+        { id: "Q038", text: "如果投入很多心力卻很少被看見或肯定，我的動力容易明顯下降。" },
+        { id: "Q039", text: "知道自己的工作確實改善了某些人的處境，會讓我覺得這份工作更值得投入。" },
+        { id: "Q040", text: "當兩份工作內容都能接受時，薪資與實際待遇通常會明顯影響我的選擇。" },
+        { id: "Q041", text: "我喜歡事情推進得快、能頻繁看到短期成果的工作節奏。" },
+        { id: "Q042", text: "比起每天都有新狀況，我更喜歡知道今天大致會遇到哪些事情。" },
+        { id: "Q043", text: "面對一個幾乎沒有既定答案的任務，我通常會覺得有發揮空間，而不是不知從何開始。" },
+        { id: "Q044", text: "比起從零開始想一套全新的東西，我更擅長把已有的方法持續改得更順。" },
+        { id: "Q045", text: "如果工作常需要重新學習陌生領域，我通常會覺得有吸引力。" },
+        { id: "Q046", text: "比起廣泛接觸很多領域，我更希望在少數主題上累積很深的專業。" },
+        { id: "Q047", text: "能直接操作、測試、觀察結果的事情，通常比只討論概念更容易讓我投入。" },
+        { id: "Q048", text: "我喜歡思考模型、原理或假設，即使短期內不一定能直接應用。" },
+        { id: "Q049", text: "如果成果可以用明確指標衡量，我會更容易判斷自己是否做得好。" },
+        { id: "Q050", text: "有些重要成果很難量化，我不介意依情境和整體品質來判斷好壞。" },
+        { id: "Q051", text: "如果目標清楚，我通常希望被交付一整塊工作，自己決定怎麼完成。" },
+        { id: "Q052", text: "做重要決定前，我通常希望先知道主要相關人的看法，再形成最後方案。" },
+        { id: "Q053", text: "接到新任務時，如果有人先說明期待成果與限制條件，我會比較容易開始。" },
+        { id: "Q054", text: "有些任務沒有明確做法時，我反而會想自己找出一條可行路線。" },
+        { id: "Q055", text: "一天中如果有不少時間需要和不同的人互動，我通常還能維持工作能量。" },
+        { id: "Q056", text: "比起頻繁對外溝通，我更喜歡在相對安靜的情況下把事情處理完整。" },
+        { id: "Q057", text: "我希望工作中能固定得到別人的回饋，這會幫助我確認方向。" },
+        { id: "Q058", text: "只要目標和標準清楚，即使很少有人回饋，我也能自己判斷是否要調整。" },
+        { id: "Q059", text: "事情突然變得緊急、需要立刻處理時，我通常能集中精神先把問題解掉。" },
+        { id: "Q060", text: "即使工作內容很有成就感，我仍會很在意下班後能否把時間留給自己的生活。" }
+      ];
+
+      let state = {
+        questionnaire_version: QUESTIONNAIRE_VERSION,
+        name: "",
+        started_at: null,
+        completed_at: null,
+        answers: {},
+        current_page: 0,
+        screen: "intro"
+      };
+
+      const introView = document.getElementById("introView");
+      const quizView = document.getElementById("quizView");
+      const completeView = document.getElementById("completeView");
+      const nameInput = document.getElementById("nameInput");
+      const startBtn = document.getElementById("startBtn");
+      const questionList = document.getElementById("questionList");
+      const prevBtn = document.getElementById("prevBtn");
+      const nextBtn = document.getElementById("nextBtn");
+      const pageText = document.getElementById("pageText");
+      const progressText = document.getElementById("progressText");
+      const progressBar = document.getElementById("progressBar");
+      const introMessage = document.getElementById("introMessage");
+      const quizMessage = document.getElementById("quizMessage");
+      const completeMessage = document.getElementById("completeMessage");
+      const downloadBtn = document.getElementById("downloadBtn");
+      const restartBtn = document.getElementById("restartBtn");
+
+      function toLocalISO(date = new Date()) {
+        const pad = n => String(n).padStart(2, "0");
+        const yyyy = date.getFullYear();
+        const mm = pad(date.getMonth() + 1);
+        const dd = pad(date.getDate());
+        const hh = pad(date.getHours());
+        const mi = pad(date.getMinutes());
+        const ss = pad(date.getSeconds());
+        const offset = -date.getTimezoneOffset();
+        const sign = offset >= 0 ? "+" : "-";
+        const abs = Math.abs(offset);
+        const oh = pad(Math.floor(abs / 60));
+        const om = pad(abs % 60);
+        return `${yyyy}-${mm}-${dd}T${hh}:${mi}:${ss}${sign}${oh}:${om}`;
+      }
+
+      // Safari / iOS 在 file:// 本機 HTML 情境下，可能禁止 localStorage。
+      // 所有儲存操作都必須安全失敗，不能讓測驗本身停止運作。
+      let storageAvailable = true;
+
+      function safeStorageGet(key) {
+        if (!storageAvailable) return null;
+        try {
+          return window.localStorage.getItem(key);
+        } catch (error) {
+          storageAvailable = false;
+          console.warn("localStorage unavailable; continuing without persistent storage.", error);
+          return null;
+        }
+      }
+
+      function safeStorageSet(key, value) {
+        if (!storageAvailable) return false;
+        try {
+          window.localStorage.setItem(key, value);
+          return true;
+        } catch (error) {
+          storageAvailable = false;
+          console.warn("localStorage unavailable; continuing without persistent storage.", error);
+          return false;
+        }
+      }
+
+      function safeStorageRemove(key) {
+        if (!storageAvailable) return false;
+        try {
+          window.localStorage.removeItem(key);
+          return true;
+        } catch (error) {
+          storageAvailable = false;
+          console.warn("localStorage unavailable; continuing without persistent storage.", error);
+          return false;
+        }
+      }
+
+      function loadState() {
+        const raw = safeStorageGet(STORAGE_KEY);
+        if (!raw) return;
+
+        try {
+          const saved = JSON.parse(raw);
+          if (!saved || saved.questionnaire_version !== QUESTIONNAIRE_VERSION) {
+            safeStorageRemove(STORAGE_KEY);
+            return;
+          }
+          state = {
+            ...state,
+            ...saved,
+            answers: saved.answers && typeof saved.answers === "object" ? saved.answers : {}
+          };
+        } catch (error) {
+          console.warn("Saved state could not be read and was cleared.", error);
+          safeStorageRemove(STORAGE_KEY);
+        }
+      }
+
+      function saveState() {
+        safeStorageSet(STORAGE_KEY, JSON.stringify(state));
+      }
+
+      function showOnly(screen) {
+        introView.classList.toggle("hidden", screen !== "intro");
+        quizView.classList.toggle("hidden", screen !== "quiz");
+        completeView.classList.toggle("hidden", screen !== "complete");
+        state.screen = screen;
+        saveState();
+      }
+
+      function setMessage(el, text = "") {
+        el.textContent = text;
+        el.classList.toggle("show", Boolean(text));
+      }
+
+      function completedCount() {
+        return QUESTIONS.reduce((count, q) => count + (Number.isInteger(Number(state.answers[q.id])) ? 1 : 0), 0);
+      }
+
+      function updateProgress() {
+        const count = completedCount();
+        const totalPages = Math.ceil(QUESTIONS.length / PAGE_SIZE);
+        progressText.textContent = `已完成 ${count} / ${QUESTIONS.length}`;
+        pageText.textContent = `第 ${state.current_page + 1} / ${totalPages} 頁`;
+        progressBar.style.width = `${(count / QUESTIONS.length) * 100}%`;
+      }
+
+      function renderPage() {
+        const totalPages = Math.ceil(QUESTIONS.length / PAGE_SIZE);
+        state.current_page = Math.min(Math.max(0, state.current_page), totalPages - 1);
+        const start = state.current_page * PAGE_SIZE;
+        const pageQuestions = QUESTIONS.slice(start, start + PAGE_SIZE);
+        questionList.innerHTML = "";
+
+        pageQuestions.forEach(q => {
+          const card = document.createElement("article");
+          card.className = "question";
+          card.dataset.questionId = q.id;
+
+          const title = document.createElement("div");
+          title.className = "q-title";
+          title.innerHTML = `<span class="q-id">${q.id}</span><span class="q-text"></span>`;
+          title.querySelector(".q-text").textContent = q.text;
+          card.appendChild(title);
+
+          const group = document.createElement("div");
+          group.className = "likert";
+          group.setAttribute("role", "radiogroup");
+          group.setAttribute("aria-label", `${q.id} ${q.text}`);
+
+          for (let score = 1; score <= 5; score++) {
+            const wrap = document.createElement("div");
+            wrap.className = "option";
+            const inputId = `${q.id}_${score}`;
+            const input = document.createElement("input");
+            input.type = "radio";
+            input.name = q.id;
+            input.id = inputId;
+            input.value = String(score);
+            input.checked = Number(state.answers[q.id]) === score;
+            input.addEventListener("change", () => {
+              state.answers[q.id] = score;
+              saveState();
+              card.classList.remove("unanswered");
+              setMessage(quizMessage, "");
+              updateProgress();
+            });
+
+            const label = document.createElement("label");
+            label.htmlFor = inputId;
+            label.textContent = String(score);
+            label.title = SCALE.labels[String(score)];
+
+            wrap.appendChild(input);
+            wrap.appendChild(label);
+            group.appendChild(wrap);
+          }
+
+          card.appendChild(group);
+          questionList.appendChild(card);
+        });
+
+        prevBtn.disabled = state.current_page === 0;
+        nextBtn.textContent = state.current_page === totalPages - 1 ? "完成測驗" : "下一頁";
+        updateProgress();
+        saveState();
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+
+      function getMissingQuestions() {
+        return QUESTIONS.filter(q => !Number.isInteger(Number(state.answers[q.id])));
+      }
+
+      function validateAllAndGoComplete() {
+        const missing = getMissingQuestions();
+        if (missing.length > 0) {
+          const first = missing[0];
+          state.current_page = Math.floor(QUESTIONS.findIndex(q => q.id === first.id) / PAGE_SIZE);
+          renderPage();
+          setMessage(quizMessage, `還有 ${missing.length} 題尚未完成。`);
+          requestAnimationFrame(() => {
+            const firstCard = questionList.querySelector(`[data-question-id="${first.id}"]`);
+            if (firstCard) {
+              firstCard.classList.add("unanswered");
+              firstCard.scrollIntoView({ behavior: "smooth", block: "center" });
+            }
+          });
+          return false;
+        }
+        state.completed_at = toLocalISO(new Date());
+        saveState();
+        showOnly("complete");
+        window.scrollTo({ top: 0, behavior: "smooth" });
+        return true;
+      }
+
+      function buildExportObject() {
+        return {
+          schema_version: SCHEMA_VERSION,
+          questionnaire_id: QUESTIONNAIRE_ID,
+          questionnaire_version: QUESTIONNAIRE_VERSION,
+          language: LANGUAGE,
+          respondent: {
+            name: state.name
+          },
+          started_at: state.started_at,
+          completed_at: state.completed_at || toLocalISO(new Date()),
+          scale: SCALE,
+          answers: QUESTIONS.map(q => ({
+            question_id: q.id,
+            question_text: q.text,
+            score: Number(state.answers[q.id])
+          }))
+        };
+      }
+
+      function sanitizeFilenamePart(value) {
+        let safe = value
+          .trim()
+          .replace(/[<>:"/\\|?*\x00-\x1F]/g, "_")
+          .replace(/\s+/g, "_")
+          .replace(/^\.+|\.+$/g, "")
+          .slice(0, 60);
+        if (!safe) safe = "respondent";
+        return safe;
+      }
+
+      function fileTimestamp(date = new Date()) {
+        const pad = n => String(n).padStart(2, "0");
+        return `${date.getFullYear()}${pad(date.getMonth() + 1)}${pad(date.getDate())}_${pad(date.getHours())}${pad(date.getMinutes())}${pad(date.getSeconds())}`;
+      }
+
+      function downloadJSON() {
+        const missing = getMissingQuestions();
+        if (missing.length > 0) {
+          showOnly("quiz");
+          state.current_page = Math.floor(QUESTIONS.findIndex(q => q.id === missing[0].id) / PAGE_SIZE);
+          renderPage();
+          setMessage(quizMessage, `還有 ${missing.length} 題尚未完成。`);
+          return;
+        }
+
+        if (!state.completed_at) {
+          state.completed_at = toLocalISO(new Date());
+          saveState();
+        }
+
+        const payload = buildExportObject();
+        const blob = new Blob([JSON.stringify(payload, null, 2)], { type: "application/json;charset=utf-8" });
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement("a");
+        link.href = url;
+        link.download = `career_test_${sanitizeFilenamePart(state.name)}_${fileTimestamp(new Date())}.json`;
+        document.body.appendChild(link);
+        link.click();
+        link.remove();
+        setTimeout(() => URL.revokeObjectURL(url), 1000);
+        setMessage(completeMessage, "");
+      }
+
+      function restart() {
+        safeStorageRemove(STORAGE_KEY);
+        state = {
+          questionnaire_version: QUESTIONNAIRE_VERSION,
+          name: "",
+          started_at: null,
+          completed_at: null,
+          answers: {},
+          current_page: 0,
+          screen: "intro"
+        };
+        nameInput.value = "";
+        setMessage(introMessage, "");
+        setMessage(quizMessage, "");
+        setMessage(completeMessage, "");
+        showOnly("intro");
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+
+      startBtn.addEventListener("click", () => {
+        const name = nameInput.value.trim();
+        if (!name) {
+          setMessage(introMessage, "請先輸入姓名／暱稱。 ");
+          nameInput.focus();
+          return;
+        }
+        state.name = name;
+        if (!state.started_at) state.started_at = toLocalISO(new Date());
+        state.completed_at = null;
+        state.screen = "quiz";
+        saveState();
+        setMessage(introMessage, "");
+        showOnly("quiz");
+        renderPage();
+      });
+
+      prevBtn.addEventListener("click", () => {
+        if (state.current_page > 0) {
+          state.current_page--;
+          setMessage(quizMessage, "");
+          renderPage();
+        }
+      });
+
+      nextBtn.addEventListener("click", () => {
+        const totalPages = Math.ceil(QUESTIONS.length / PAGE_SIZE);
+        if (state.current_page < totalPages - 1) {
+          state.current_page++;
+          setMessage(quizMessage, "");
+          renderPage();
+        } else {
+          validateAllAndGoComplete();
+        }
+      });
+
+      downloadBtn.addEventListener("click", downloadJSON);
+      restartBtn.addEventListener("click", restart);
+
+      loadState();
+      nameInput.value = state.name || "";
+
+      if (state.screen === "quiz" && state.name) {
+        showOnly("quiz");
+        renderPage();
+      } else if (state.screen === "complete" && state.name && getMissingQuestions().length === 0) {
+        showOnly("complete");
+      } else {
+        showOnly("intro");
+      }
+    })();
+  </script>
+</body>
+</html>
