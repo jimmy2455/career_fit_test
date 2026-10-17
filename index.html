@@ -112,7 +112,14 @@ function responseObject(){
   if(!completedAt)completedAt=localISO();
   return {schema_version:'career-response-1.0',questionnaire_id:'career-fit-test',questionnaire_version:VERSION,question_mapping_version:MAPPING_VERSION,language:'zh-TW',respondent:{name:state.name},started_at:state.startedAt,completed_at:completedAt,scale:SCALE,answers:QUESTIONS.map(q=>({question_id:q.question_id,question_text:q.text,score:state.answers[q.question_id]}))};
 }
-function safeFilePart(s){let x=String(s).normalize('NFKC').replace(/[<>:"/\|?* -]/g,'_').replace(/[. ]+$/g,'').trim();return (x||'respondent').slice(0,60);}
+function safeFilePart(s){
+  let x=String(s).normalize('NFKC');
+  // Replace characters that are unsafe in common file systems without embedding control bytes in this HTML source.
+  x=x.replace(/[<>:"\/\\|?*]/g,'_');
+  x=Array.from(x).map(ch=>ch.charCodeAt(0)<32?'_':ch).join('');
+  x=x.replace(/[. ]+$/g,'').trim();
+  return (x||'respondent').slice(0,60);
+}
 function stamp(){const d=new Date(),p=n=>String(n).padStart(2,'0');return `${d.getFullYear()}${p(d.getMonth()+1)}${p(d.getDate())}_${p(d.getHours())}${p(d.getMinutes())}${p(d.getSeconds())}`;}
 function downloadJSON(){
   const data=responseObject(), blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json;charset=utf-8'}), url=URL.createObjectURL(blob), a=document.createElement('a'); a.href=url;a.download=`career_test_${safeFilePart(state.name)}_${stamp()}.json`;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);
