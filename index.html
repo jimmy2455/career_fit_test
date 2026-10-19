@@ -2,140 +2,70 @@
 <html lang="zh-Hant">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>職涯性向與工作價值觀測驗 v2.1.0</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>職涯性向與工作價值觀測驗 v3.0.0</title>
 <style>
-:root{--bg:#f4f6fb;--card:#fff;--text:#182033;--muted:#667085;--line:#e5e9f2;--accent:#3157d5;--accent2:#e9eeff;--danger:#b42318;--shadow:0 12px 32px rgba(29,41,57,.08);}
-*{box-sizing:border-box} html{scroll-behavior:smooth} body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans TC","PingFang TC",sans-serif;background:var(--bg);color:var(--text);line-height:1.6}
-button,input{font:inherit} .shell{max-width:920px;margin:0 auto;padding:24px 16px 56px} .topbar{display:flex;justify-content:space-between;gap:12px;align-items:center;margin-bottom:18px} .brand{font-weight:800;letter-spacing:.01em} .version{font-size:.85rem;color:var(--muted);background:#fff;border:1px solid var(--line);padding:5px 10px;border-radius:999px}
-.card{background:var(--card);border:1px solid var(--line);border-radius:20px;box-shadow:var(--shadow);padding:28px} h1{font-size:clamp(1.7rem,5vw,2.35rem);line-height:1.25;margin:0 0 12px} h2{font-size:1.25rem;margin:0} p{margin:8px 0 0} .muted{color:var(--muted)} .intro-list{margin:18px 0;padding-left:20px;color:#344054} .field{margin-top:24px} label.input-label{display:block;font-weight:700;margin-bottom:8px} input[type=text]{width:100%;border:1px solid #cfd6e4;border-radius:12px;padding:13px 14px;background:#fff;outline:none} input[type=text]:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(49,87,213,.12)} .error{color:var(--danger);font-weight:700;margin-top:10px} .hidden{display:none!important}
-.btn{border:0;border-radius:12px;padding:12px 18px;font-weight:800;cursor:pointer;min-height:46px} .btn-primary{background:var(--accent);color:#fff} .btn-secondary{background:#fff;color:#25324b;border:1px solid #cfd6e4} .btn-danger{background:#fff;color:var(--danger);border:1px solid #f1b5ae} .btn:focus-visible{outline:3px solid rgba(49,87,213,.25);outline-offset:2px} .start-actions{display:flex;gap:10px;margin-top:24px;flex-wrap:wrap}
-.progress-wrap{position:sticky;top:0;z-index:10;background:rgba(244,246,251,.94);backdrop-filter:blur(10px);padding:10px 0 14px;margin:-4px 0 10px} .progress-meta{display:flex;justify-content:space-between;gap:12px;font-size:.92rem;color:var(--muted);margin-bottom:8px} .progress-track{height:10px;background:#e2e7f0;border-radius:999px;overflow:hidden} .progress-bar{height:100%;background:var(--accent);width:0;transition:width .2s ease}
-.scale-key{display:flex;justify-content:space-between;gap:8px;color:var(--muted);font-size:.8rem;margin:10px 2px 16px} .questions{display:grid;gap:14px} fieldset.q{margin:0;border:1px solid var(--line);background:#fff;border-radius:16px;padding:18px} fieldset.q.missing{border-color:#e66b60;box-shadow:0 0 0 2px rgba(180,35,24,.08)} legend{padding:0 6px;font-weight:750;line-height:1.5} .qid{color:var(--muted);font-size:.82rem;margin-right:6px} .likert{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-top:14px} .choice{position:relative} .choice input{position:absolute;opacity:0;pointer-events:none} .choice label{display:flex;align-items:center;justify-content:center;min-height:44px;border:1px solid #d6dce8;border-radius:11px;background:#fafbfe;cursor:pointer;font-weight:800;color:#475467;transition:.12s} .choice input:checked+label{background:var(--accent2);border-color:var(--accent);color:var(--accent);box-shadow:inset 0 0 0 1px var(--accent)} .choice input:focus-visible+label{outline:3px solid rgba(49,87,213,.2)}
-.nav{display:flex;justify-content:space-between;gap:12px;margin-top:20px} .nav .right{display:flex;gap:10px;margin-left:auto} .finish-card{text-align:center;padding:42px 28px} .finish-icon{font-size:2.6rem} .finish-actions{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-top:24px} .notice{margin:0 0 14px;padding:11px 13px;border-radius:12px;background:#fff4f2;color:var(--danger);font-weight:700;border:1px solid #ffd2cc}
-.storage-note{font-size:.83rem;color:#7a5b00;background:#fffae8;border:1px solid #f4df9b;border-radius:10px;padding:9px 11px;margin-top:12px}
-@media(max-width:640px){.shell{padding:14px 10px 36px} .card{padding:20px 16px;border-radius:16px} fieldset.q{padding:15px 12px} .likert{gap:5px} .choice label{min-height:46px} .scale-key{font-size:.72rem} .nav{align-items:stretch} .nav .right{flex:1} .nav .right .btn{flex:1} .btn{padding:11px 13px}}
+:root{--bg:#f4f7fb;--card:#fff;--text:#172033;--muted:#657085;--line:#dfe5ee;--accent:#275d87;--accent2:#1f496b;--danger:#b3261e;--shadow:0 10px 30px rgba(23,32,51,.08)}
+*{box-sizing:border-box} body{margin:0;font-family:system-ui,-apple-system,"Segoe UI","Noto Sans TC",sans-serif;background:var(--bg);color:var(--text);line-height:1.55}
+.wrap{max-width:900px;margin:0 auto;padding:24px 16px 48px} .card{background:var(--card);border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow);padding:24px}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2rem 0 .5rem} h2{font-size:1.25rem;margin:0 0 1rem} .muted{color:var(--muted)}
+label.name{display:block;font-weight:700;margin:20px 0 8px} input[type=text]{width:100%;padding:14px 15px;border:1px solid #bcc7d5;border-radius:12px;font-size:16px}
+button{appearance:none;border:0;border-radius:12px;padding:13px 18px;font-size:16px;font-weight:700;cursor:pointer} .primary{background:var(--accent);color:#fff} .primary:hover{background:var(--accent2)} .secondary{background:#eaf0f6;color:#24415d} button:disabled{opacity:.45;cursor:not-allowed}
+.topbar{position:sticky;top:0;z-index:10;background:rgba(244,247,251,.94);backdrop-filter:blur(8px);padding:10px 0 14px} .progressrow{display:flex;justify-content:space-between;gap:12px;align-items:center;font-size:.94rem;color:var(--muted);margin-bottom:8px}
+.progress{height:10px;background:#dbe3ed;border-radius:999px;overflow:hidden} .bar{height:100%;background:var(--accent);width:0;transition:width .2s}
+.q{border:1px solid var(--line);border-radius:15px;padding:18px;margin:14px 0;background:#fff} .q.missing{border-color:#d66;background:#fff7f7} .qid{font-weight:800;color:var(--accent);font-size:.88rem;margin-bottom:5px} .qtext{font-weight:650;margin-bottom:14px}
+.scale{display:grid;grid-template-columns:repeat(5,1fr);gap:8px} .opt{position:relative} .opt input{position:absolute;opacity:0;pointer-events:none} .opt label{display:flex;min-height:68px;align-items:center;justify-content:center;text-align:center;border:1px solid #cbd4df;border-radius:12px;padding:8px 4px;font-size:.82rem;cursor:pointer;background:#fff} .opt input:checked+label{background:#e4eef7;border-color:var(--accent);box-shadow:inset 0 0 0 1px var(--accent);color:#173b58;font-weight:800}
+.nav{display:flex;gap:10px;justify-content:space-between;margin-top:18px} .nav .right{display:flex;gap:10px} .alert{padding:12px 14px;border-radius:12px;background:#fff0ef;color:#8b1e17;border:1px solid #efc7c3;margin:12px 0;display:none}
+.center{text-align:center} .done-icon{font-size:3rem} .actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:20px}
+.note{font-size:.9rem;background:#eef4f9;border-radius:12px;padding:12px 14px;margin-top:14px}
+@media(max-width:640px){.wrap{padding:12px 10px 32px} .card{padding:16px;border-radius:14px} .scale{grid-template-columns:1fr} .opt label{min-height:auto;justify-content:flex-start;text-align:left;padding:11px 13px} .nav{flex-direction:column} .nav .right{display:grid;grid-template-columns:1fr 1fr} .nav button{width:100%}}
 </style>
 </head>
-<body>
-<div class="shell">
-  <div class="topbar"><div class="brand">職涯性向與工作價值觀測驗</div><div class="version">v2.1.0</div></div>
-
-  <section id="startScreen" class="card">
-    <h1>了解你的工作偏好與職涯特質</h1>
-    <p class="muted">共 96 題。所有題目皆使用相同的 1～5 同意程度量表，沒有標準答案，請依你通常最自然的傾向作答。</p>
-    <ul class="intro-list"><li>1＝非常不同意，5＝非常同意</li><li>所有題目必填</li><li>重新整理後會盡量保留進度</li><li>完成後只會匯出原始作答 JSON，不會在本頁分析或推薦職業</li></ul>
-    <div class="field"><label class="input-label" for="nameInput">姓名／暱稱</label><input id="nameInput" type="text" maxlength="80" autocomplete="name" placeholder="請輸入姓名或暱稱"></div>
-    <div id="nameError" class="error hidden">請先輸入姓名／暱稱。</div>
-    <div id="storageNote" class="storage-note hidden">此瀏覽器目前無法使用 localStorage；仍可正常作答與下載 JSON，但重新整理後可能無法保留進度。</div>
-    <div class="start-actions"><button id="startBtn" class="btn btn-primary" type="button">開始測驗</button></div>
-  </section>
-
-  <section id="quizScreen" class="hidden">
-    <div class="progress-wrap">
-      <div class="progress-meta"><span id="progressText">已完成 0 / 96</span><span id="pageText">第 1 / 14 頁</span></div>
-      <div class="progress-track" aria-hidden="true"><div id="progressBar" class="progress-bar"></div></div>
-    </div>
-    <div id="quizNotice" class="notice hidden"></div>
-    <div class="scale-key"><span>1 非常不同意</span><span>3 普通／不確定</span><span>5 非常同意</span></div>
-    <div id="questions" class="questions"></div>
-    <div class="nav">
-      <button id="prevBtn" class="btn btn-secondary" type="button">上一頁</button>
-      <div class="right"><button id="nextBtn" class="btn btn-primary" type="button">下一頁</button></div>
-    </div>
-  </section>
-
-  <section id="finishScreen" class="card finish-card hidden">
-    <div class="finish-icon">✓</div><h1>測驗完成</h1>
-    <p class="muted">請下載 JSON，並將 JSON 上傳至指定的 AI 職涯分析工具進行分析。</p>
-    <div class="finish-actions"><button id="downloadBtn" class="btn btn-primary" type="button">下載作答 JSON</button><button id="resetBtn" class="btn btn-danger" type="button">重新開始／下一位填寫者</button></div>
-  </section>
+<body><div class="wrap">
+<section id="start" class="card">
+<h1>職涯性向與工作價值觀測驗</h1>
+<p class="muted">Questionnaire v3.0.0 · 共 117 題 · 約 20–30 分鐘</p>
+<p>請依照你平常較自然的傾向作答。沒有好壞答案，也不是能力或知識測驗。</p>
+<div class="note">1 = 非常不同意 · 2 = 不同意 · 3 = 普通／不確定 · 4 = 同意 · 5 = 非常同意</div>
+<label class="name" for="name">姓名／暱稱</label><input id="name" type="text" autocomplete="name" maxlength="80" placeholder="請輸入姓名或暱稱">
+<div id="startAlert" class="alert"></div>
+<div style="margin-top:18px"><button id="startBtn" class="primary">開始測驗</button></div>
+</section>
+<section id="test" style="display:none">
+<div class="topbar"><div class="progressrow"><span id="doneText">已完成 0 / 117</span><span id="pageText">第 1 / 17 頁</span></div><div class="progress"><div id="bar" class="bar"></div></div></div>
+<div id="missingAlert" class="alert"></div><div id="questions"></div>
+<div class="nav"><button id="prevBtn" class="secondary">上一頁</button><div class="right"><button id="resetTop" class="secondary">重新開始</button><button id="nextBtn" class="primary">下一頁</button></div></div>
+</section>
+<section id="done" class="card center" style="display:none"><div class="done-icon">✓</div><h1>測驗完成</h1><p>請下載 JSON，並將 JSON 上傳至指定的 AI 職涯分析工具進行分析。</p><div class="actions"><button id="downloadBtn" class="primary">下載作答 JSON</button><button id="restartBtn" class="secondary">重新開始／下一位填寫者</button></div></section>
 </div>
 <script>
 'use strict';
-const QUESTIONS=[{"question_id":"Q001","text":"遇到資訊很多的問題時，我通常會先把問題拆成幾個部分，再逐一釐清。"},{"question_id":"Q002","text":"面對由多個步驟組成的事情，我會自然留意前後環節如何互相影響。"},{"question_id":"Q003","text":"看到一組資訊時，如果能整理成數字、比例或趨勢，我通常會更容易掌握重點。"},{"question_id":"Q004","text":"沒有現成做法時，我會自然想到幾種不同的處理方式，而不只沿用第一個想到的方案。"},{"question_id":"Q005","text":"只看文字說明很複雜時，我常會自己畫成圖，或在腦中形成位置關係。"},{"question_id":"Q006","text":"需要整理複雜想法時，把它寫成文字通常能幫我釐清結構與重點。"},{"question_id":"Q007","text":"處理資訊或成果時，我會自然注意數字、格式、順序或用詞中的小差異。"},{"question_id":"Q008","text":"比起頻繁切換不同任務，我更容易在能長時間深入處理同一個主題時進入狀態。"},{"question_id":"Q009","text":"比起只討論原理，我通常更想實際操作、測試或調整某個東西來理解它。"},{"question_id":"Q010","text":"一天中如果需要和許多不同的人來回互動，我通常不會因此很快耗盡精力。"},{"question_id":"Q011","text":"別人描述一個困難時，我通常會先留意他的處境與真正需要，而不只看事情表面。"},{"question_id":"Q012","text":"需要讓不同人對同一件事有共同理解時，我願意主動說明、提問並確認彼此理解是否一致。"},{"question_id":"Q013","text":"大家偏好的方案不同時，如果我認為某個方向更合適，我通常願意提出理由爭取認同。"},{"question_id":"Q014","text":"共同任務停滯、沒有人決定下一步時，我通常願意先提出方向並推動大家往前。"},{"question_id":"Q015","text":"共同完成事情時，我傾向主動共享進度與資訊，也會了解別人的限制，讓彼此能及時調整。"},{"question_id":"Q016","text":"只要目標與限制清楚，我通常希望自己決定方法與順序，而不是被規定每一步。"},{"question_id":"Q017","text":"規則、流程與判斷標準越清楚，我通常越容易安心投入。"},{"question_id":"Q018","text":"資訊還不完整時，只要風險可控，我通常能先做出暫時判斷並繼續推進。"},{"question_id":"Q019","text":"當兩個選擇差異不大時，如果其中一個可能帶來較大成果但結果較不確定，我通常願意考慮它。"},{"question_id":"Q020","text":"工作內容若經常接觸新情境或不同任務，通常會讓我更有精神。"},{"question_id":"Q021","text":"遇到陌生主題時，即使不是立刻需要，我也常會想多了解它怎麼運作。"},{"question_id":"Q022","text":"面對較大的任務時，我通常會先整理順序、時間點與需要協調的資源。"},{"question_id":"Q023","text":"原本的安排突然改變時，我通常能快速重新排出新的做法與優先順序。"},{"question_id":"Q024","text":"即使沒有人知道，只要完成一個很困難的目標，我仍然會有很強的成就感。"},{"question_id":"Q025","text":"需要做重要判斷時，我會想先找資料、數據、紀錄、測試或其他可驗證的依據。"},{"question_id":"Q026","text":"自己的成果被具體看見與肯定，會明顯提升我持續投入的動力。"},{"question_id":"Q027","text":"在兩個內容都能接受的選擇中，薪資與福利差異通常會明顯影響我的決定。"},{"question_id":"Q028","text":"短時間內能持續完成一個個清楚的小成果，通常會讓我更有工作動力。"},{"question_id":"Q029","text":"如果一個流程會重複很多次，我常會想找出哪一步可以更省時間、少出錯或更順。"},{"question_id":"Q030","text":"比起廣泛接觸很多主題，我更願意在少數領域長期累積深度。"},{"question_id":"Q031","text":"在進行重要任務時，我希望在完成前能固定收到幾次回饋，以確認方向是否需要校正。"},{"question_id":"Q032","text":"即使內容很有吸引力，如果長期無法保留穩定的私人時間，我也很難接受。"},{"question_id":"Q033","text":"當結果和預期不同時，我會想先找出是哪一段推理或因果出了問題，再決定要不要換做法。"},{"question_id":"Q034","text":"如果一段時間看不到明顯進展，我通常會想先換別的事情做。"},{"question_id":"Q035","text":"在共同任務中，即使各部分彼此相依，我仍比較喜歡各自完成，最後再一次整合。"},{"question_id":"Q036","text":"同時有幾件事撞在一起時，我會先重新排序優先順序，再決定各自投入多少時間。"},{"question_id":"Q037","text":"已有可行方法時，我通常願意做小幅調整並比較效果，看能不能再更好。"},{"question_id":"Q038","text":"已有一個可行方法時，我通常不太想另外發展一套全新的做法。"},{"question_id":"Q039","text":"知道自己的成果確實讓別人的處境變得更好，會讓我更覺得投入是有意義的。"},{"question_id":"Q040","text":"遇到沒有明確答案或清楚標準的任務時，我通常很難放心開始。"},{"question_id":"Q041","text":"時間很趕、資料又不完整時，我通常更願意相信第一印象，而不是再花時間查證。"},{"question_id":"Q042","text":"工作是否經常打亂原本的休息與生活安排，會明顯影響我對它的接受程度。"},{"question_id":"Q043","text":"即使時間有限，在完成一件重要事情前，我通常仍會再核對最容易出錯的細節。"},{"question_id":"Q044","text":"如果一件共同成果需要有人對整體負責，我通常願意承擔取捨與最後決定的責任。"},{"question_id":"Q045","text":"只要目前的方法已經足夠使用，我通常不太想額外花時間學新的工具或知識。"},{"question_id":"Q046","text":"即使一項工作要很久才看得到階段成果，我通常也不會因此降低投入。"},{"question_id":"Q047","text":"即使有數據可用，我通常還是更習慣用文字描述或整體感受來理解情況。"},{"question_id":"Q048","text":"如果能選擇，我更偏好長時間自己處理事情，而不是頻繁與不同的人接觸。"},{"question_id":"Q049","text":"即使幾乎沒有既定流程或標準，我通常也能直接開始，不太需要先把規範補齊。"},{"question_id":"Q050","text":"目標如果有一定難度、需要努力突破，通常會比很容易完成的事情更能激起我的投入。"},{"question_id":"Q051","text":"我喜歡聽取別人指出盲點或提供意見，但最後如何完成仍希望由自己決定。"},{"question_id":"Q052","text":"如果資訊可以用圖示或示範表達，我通常不太想再花時間閱讀或整理成文字。"},{"question_id":"Q053","text":"對方一開始不接受我的觀點時，我常會換一種切入方式，看看能否改變他的判斷。"},{"question_id":"Q054","text":"工作內容頻繁改變時，我通常會更想回到熟悉而穩定的模式。"},{"question_id":"Q055","text":"即使工作內容很符合期待，我仍會把待遇是否合理視為重要的選擇條件。"},{"question_id":"Q056","text":"一個局部問題反覆出現時，我常會往前後環節或其他相關部分找可能的連動原因。"},{"question_id":"Q057","text":"接觸陌生的工具、設備或系統時，我常會透過實際試用來摸清它怎麼運作。"},{"question_id":"Q058","text":"如果完成一件事的過程需要頻繁先取得他人同意，我通常會覺得難以發揮。"},{"question_id":"Q059","text":"原先的方法突然不能用時，我通常能在不久後轉換到另一種可行做法。"},{"question_id":"Q060","text":"當一個主題需要長時間反覆鑽研細節時，我通常會想換到新的領域。"},{"question_id":"Q061","text":"看到版面、物件或空間安排時，我會自然注意比例、位置與彼此關係。"},{"question_id":"Q062","text":"討論變得混亂時，我常會把重點重新整理成大家能接得上的說法。"},{"question_id":"Q063","text":"面對結果有明顯不確定性的選擇時，我通常會優先選較可預測的方案，即使可能少一些收穫。"},{"question_id":"Q064","text":"知道別人有注意到我的貢獻，通常會讓我更願意持續投入同類型的任務。"},{"question_id":"Q065","text":"需要重新安排物件、區域或資訊版面時，我常會先在腦中想像調整後的樣子。"},{"question_id":"Q066","text":"在共同任務中遇到複雜內容時，我比較希望只靠文件或訊息傳遞，盡量少做即時來回說明。"},{"question_id":"Q067","text":"面對有多種合理解法的問題時，我能先選一個假設去試，而不需要先確定唯一正解。"},{"question_id":"Q068","text":"當工作責任或負擔明顯增加時，我會很在意報酬是否也有相應提升。"},{"question_id":"Q069","text":"只要整體感覺合理，我通常不會特別追查每一步之間是否真的有因果關係。"},{"question_id":"Q070","text":"進入一個不熟悉的群體共同完成事情時，我通常願意主動增加互動，而不是只維持必要聯絡。"},{"question_id":"Q071","text":"在需要共同決定方向時，只要別人已經有自己的選擇，即使我認為還有更好的方案，我通常也不想花力氣影響他。"},{"question_id":"Q072","text":"在容易出現小差錯的重複工作中，我偏好有一致流程與明確檢查標準。"},{"question_id":"Q073","text":"進行較長的任務時，我希望別人不只在最後看結果，也能在過程中對我的進展給出具體回應。"},{"question_id":"Q074","text":"一天中如果能在幾個短週期任務間快速推進，我通常會覺得節奏合適。"},{"question_id":"Q075","text":"在工作選擇中，我會把工時是否可預測、能否保留生活安排，視為和工作內容同樣需要考慮的條件。"},{"question_id":"Q076","text":"當一個結果可能同時受到多個環節影響時，我會想先整理各環節之間的關係，再判斷從哪裡處理。"},{"question_id":"Q077","text":"比較幾個方案時，如果能把差異轉成數量、比例或明確指標，我通常更容易做判斷。"},{"question_id":"Q078","text":"現有做法都能使用、但各有明顯限制時，我通常會想重新組合或發展另一種做法。"},{"question_id":"Q079","text":"資訊零散又複雜時，我常會用自己的話重新整理成一段說明，幫助自己掌握重點。"},{"question_id":"Q080","text":"只要整體方向正確，成果中的小差異通常不值得我再花時間逐一確認。"},{"question_id":"Q081","text":"如果一個問題值得深入，我可以連續花很長一段時間追下去，而不需要頻繁換成其他事情。"},{"question_id":"Q082","text":"要理解一個新的流程、工具或系統時，我通常希望親自操作一次，而不只閱讀說明。"},{"question_id":"Q083","text":"共同任務中有人卡住時，只要沒有直接影響我的部分，我通常不會特別去了解他遇到的困難。"},{"question_id":"Q084","text":"團隊面臨取捨時，比起等到每個人都完全同意，我更願意在資訊足夠後做出可執行的決定並承擔結果。"},{"question_id":"Q085","text":"當我的進度會影響別人的下一步時，我會主動對齊時間、需求與交接方式，而不是只完成自己的部分。"},{"question_id":"Q086","text":"有多種方法都能達成目標時，我通常希望先有人指定做法，照著執行會比自己決定更自在。"},{"question_id":"Q087","text":"只要失敗的代價可承受，我願意測試結果較不確定、但可能帶來更好成果的方案。"},{"question_id":"Q088","text":"比起長期維持熟悉而固定的內容，我更容易在工作內容定期出現新變化時保持投入。"},{"question_id":"Q089","text":"遇到一個自己不熟悉、但可能改善成果的新概念或工具時，我通常願意花時間把它弄懂。"},{"question_id":"Q090","text":"同時有多項任務、期限又不同時，比起直接從眼前最急的事情開始，我更傾向先排出整體順序與時間節點。"},{"question_id":"Q091","text":"進行到一半突然增加新的限制時，我通常能保留原本目標，同時快速調整達成目標的路徑。"},{"question_id":"Q092","text":"完成一件原本很容易的事情，通常不如攻下一個有難度、需要突破的目標讓我有滿足感。"},{"question_id":"Q093","text":"如果一個解釋聽起來合理，即使目前缺少可驗證的資料或紀錄，我通常也願意直接採用。"},{"question_id":"Q094","text":"如果長期做出的成果很少被看見或得到具體回應，即使事情本身能完成，我的投入感也容易下降。"},{"question_id":"Q095","text":"一個流程已經穩定可用後，我仍會留意其中的等待、重工或多餘步驟，看是否值得再改善。"},{"question_id":"Q096","text":"與其持續更換不同領域，我更希望在少數主題上累積到能理解細節與來龍去脈的程度。"}];
-const SCALE={min:1,max:5,labels:{"1":"非常不同意","2":"不同意","3":"普通／不確定","4":"同意","5":"非常同意"}};
-const VERSION="2.1.0", MAPPING_VERSION="career_question_mapping_v2.1.0", STORAGE_KEY="career-fit-test::2.1.0";
-const PER_PAGE=7, TOTAL_PAGES=Math.ceil(QUESTIONS.length/PER_PAGE);
-let memoryStore=null, storageAvailable=true, completedAt=null;
-
-function localISO(date=new Date()){
-  const pad=n=>String(n).padStart(2,'0');
-  const off=-date.getTimezoneOffset(), sign=off>=0?'+':'-', ah=Math.floor(Math.abs(off)/60), am=Math.abs(off)%60;
-  return `${date.getFullYear()}-${pad(date.getMonth()+1)}-${pad(date.getDate())}T${pad(date.getHours())}:${pad(date.getMinutes())}:${pad(date.getSeconds())}${sign}${pad(ah)}:${pad(am)}`;
+const QUESTIONS=[{"id":"Q001","text":"遇到資訊很多的問題時，我通常會先把問題拆成幾個部分，再逐一釐清。"},{"id":"Q002","text":"面對由多個步驟組成的事情，我會自然留意前後環節如何互相影響。"},{"id":"Q003","text":"看到一組資訊時，如果能整理成數字、比例或趨勢，我通常會更容易掌握重點。"},{"id":"Q004","text":"沒有現成做法時，我會自然想到幾種不同的處理方式，而不只沿用第一個想到的方案。"},{"id":"Q005","text":"只看文字說明很複雜時，我常會自己畫成圖，或在腦中形成位置關係。"},{"id":"Q006","text":"需要整理複雜想法時，把它寫成文字通常能幫我釐清結構與重點。"},{"id":"Q007","text":"處理資訊或成果時，我會自然注意數字、格式、順序或用詞中的小差異。"},{"id":"Q008","text":"比起頻繁切換不同任務，我更容易在能長時間深入處理同一個主題時進入狀態。"},{"id":"Q009","text":"比起只討論原理，我通常更想實際操作、測試或調整某個東西來理解它。"},{"id":"Q010","text":"一天中如果需要和許多不同的人來回互動，我通常不會因此很快耗盡精力。"},{"id":"Q011","text":"別人描述一個困難時，我通常會先留意他的處境與真正需要，而不只看事情表面。"},{"id":"Q012","text":"需要讓不同人對同一件事有共同理解時，我願意主動說明、提問並確認彼此理解是否一致。"},{"id":"Q013","text":"大家偏好的方案不同時，如果我認為某個方向更合適，我通常願意提出理由爭取認同。"},{"id":"Q014","text":"共同任務停滯、沒有人決定下一步時，我通常願意先提出方向並推動大家往前。"},{"id":"Q015","text":"共同完成事情時，我傾向主動共享進度與資訊，也會了解別人的限制，讓彼此能及時調整。"},{"id":"Q016","text":"只要目標與限制清楚，我通常希望自己決定方法與順序，而不是被規定每一步。"},{"id":"Q017","text":"規則、流程與判斷標準越清楚，我通常越容易安心投入。"},{"id":"Q018","text":"資訊還不完整時，只要風險可控，我通常能先做出暫時判斷並繼續推進。"},{"id":"Q019","text":"當兩個選擇差異不大時，如果其中一個可能帶來較大成果但結果較不確定，我通常願意考慮它。"},{"id":"Q020","text":"工作內容若經常接觸新情境或不同任務，通常會讓我更有精神。"},{"id":"Q021","text":"遇到陌生主題時，即使不是立刻需要，我也常會想多了解它怎麼運作。"},{"id":"Q022","text":"面對較大的任務時，我通常會先整理順序、時間點與需要協調的資源。"},{"id":"Q023","text":"原本的安排突然改變時，我通常能快速重新排出新的做法與優先順序。"},{"id":"Q024","text":"即使沒有人知道，只要完成一個很困難的目標，我仍然會有很強的成就感。"},{"id":"Q025","text":"需要做重要判斷時，我會想先找資料、數據、紀錄、測試或其他可驗證的依據。"},{"id":"Q026","text":"自己的成果被具體看見與肯定，會明顯提升我持續投入的動力。"},{"id":"Q027","text":"在兩個內容都能接受的選擇中，薪資與福利差異通常會明顯影響我的決定。"},{"id":"Q028","text":"短時間內能持續完成一個個清楚的小成果，通常會讓我更有工作動力。"},{"id":"Q029","text":"如果一個流程會重複很多次，我常會想找出哪一步可以更省時間、少出錯或更順。"},{"id":"Q030","text":"比起廣泛接觸很多主題，我更願意在少數領域長期累積深度。"},{"id":"Q031","text":"在進行重要任務時，我希望在完成前能固定收到幾次回饋，以確認方向是否需要校正。"},{"id":"Q032","text":"即使內容很有吸引力，如果長期無法保留穩定的私人時間，我也很難接受。"},{"id":"Q033","text":"當結果和預期不同時，我會想先找出是哪一段推理或因果出了問題，再決定要不要換做法。"},{"id":"Q034","text":"如果一段時間看不到明顯進展，我通常會想先換別的事情做。"},{"id":"Q035","text":"在共同任務中，即使各部分彼此相依，我仍比較喜歡各自完成，最後再一次整合。"},{"id":"Q036","text":"同時有幾件事撞在一起時，我會先重新排序優先順序，再決定各自投入多少時間。"},{"id":"Q037","text":"已有可行方法時，我通常願意做小幅調整並比較效果，看能不能再更好。"},{"id":"Q038","text":"已有一個可行方法時，我通常不太想另外發展一套全新的做法。"},{"id":"Q039","text":"知道自己的成果確實讓別人的處境變得更好，會讓我更覺得投入是有意義的。"},{"id":"Q040","text":"遇到沒有明確答案或清楚標準的任務時，我通常很難放心開始。"},{"id":"Q041","text":"時間很趕、資料又不完整時，我通常更願意相信第一印象，而不是再花時間查證。"},{"id":"Q042","text":"工作是否經常打亂原本的休息與生活安排，會明顯影響我對它的接受程度。"},{"id":"Q043","text":"即使時間有限，在完成一件重要事情前，我通常仍會再核對最容易出錯的細節。"},{"id":"Q044","text":"如果一件共同成果需要有人對整體負責，我通常願意承擔取捨與最後決定的責任。"},{"id":"Q045","text":"只要目前的方法已經足夠使用，我通常不太想額外花時間學新的工具或知識。"},{"id":"Q046","text":"即使一項工作要很久才看得到階段成果，我通常也不會因此降低投入。"},{"id":"Q047","text":"即使有數據可用，我通常還是更習慣用文字描述或整體感受來理解情況。"},{"id":"Q048","text":"如果能選擇，我更偏好長時間自己處理事情，而不是頻繁與不同的人接觸。"},{"id":"Q049","text":"即使幾乎沒有既定流程或標準，我通常也能直接開始，不太需要先把規範補齊。"},{"id":"Q050","text":"目標如果有一定難度、需要努力突破，通常會比很容易完成的事情更能激起我的投入。"},{"id":"Q051","text":"我喜歡聽取別人指出盲點或提供意見，但最後如何完成仍希望由自己決定。"},{"id":"Q052","text":"如果資訊可以用圖示或示範表達，我通常不太想再花時間閱讀或整理成文字。"},{"id":"Q053","text":"對方一開始不接受我的觀點時，我常會換一種切入方式，看看能否改變他的判斷。"},{"id":"Q054","text":"工作內容頻繁改變時，我通常會更想回到熟悉而穩定的模式。"},{"id":"Q055","text":"即使工作內容很符合期待，我仍會把待遇是否合理視為重要的選擇條件。"},{"id":"Q056","text":"一個局部問題反覆出現時，我常會往前後環節或其他相關部分找可能的連動原因。"},{"id":"Q057","text":"接觸陌生的工具、設備或系統時，我常會透過實際試用來摸清它怎麼運作。"},{"id":"Q058","text":"如果完成一件事的過程需要頻繁先取得他人同意，我通常會覺得難以發揮。"},{"id":"Q059","text":"原先的方法突然不能用時，我通常能在不久後轉換到另一種可行做法。"},{"id":"Q060","text":"當一個主題需要長時間反覆鑽研細節時，我通常會想換到新的領域。"},{"id":"Q061","text":"看到版面、物件或空間安排時，我會自然注意比例、位置與彼此關係。"},{"id":"Q062","text":"討論變得混亂時，我常會把重點重新整理成大家能接得上的說法。"},{"id":"Q063","text":"面對結果有明顯不確定性的選擇時，我通常會優先選較可預測的方案，即使可能少一些收穫。"},{"id":"Q064","text":"知道別人有注意到我的貢獻，通常會讓我更願意持續投入同類型的任務。"},{"id":"Q065","text":"需要重新安排物件、區域或資訊版面時，我常會先在腦中想像調整後的樣子。"},{"id":"Q066","text":"在共同任務中遇到複雜內容時，我比較希望只靠文件或訊息傳遞，盡量少做即時來回說明。"},{"id":"Q067","text":"面對有多種合理解法的問題時，我能先選一個假設去試，而不需要先確定唯一正解。"},{"id":"Q068","text":"當工作責任或負擔明顯增加時，我會很在意報酬是否也有相應提升。"},{"id":"Q069","text":"只要整體感覺合理，我通常不會特別追查每一步之間是否真的有因果關係。"},{"id":"Q070","text":"進入一個不熟悉的群體共同完成事情時，我通常願意主動增加互動，而不是只維持必要聯絡。"},{"id":"Q071","text":"在需要共同決定方向時，只要別人已經有自己的選擇，即使我認為還有更好的方案，我通常也不想花力氣影響他。"},{"id":"Q072","text":"在容易出現小差錯的重複工作中，我偏好有一致流程與明確檢查標準。"},{"id":"Q073","text":"進行較長的任務時，我希望別人不只在最後看結果，也能在過程中對我的進展給出具體回應。"},{"id":"Q074","text":"一天中如果能在幾個短週期任務間快速推進，我通常會覺得節奏合適。"},{"id":"Q075","text":"在工作選擇中，我會把工時是否可預測、能否保留生活安排，視為和工作內容同樣需要考慮的條件。"},{"id":"Q076","text":"當一個結果可能同時受到多個環節影響時，我會想先整理各環節之間的關係，再判斷從哪裡處理。"},{"id":"Q077","text":"比較幾個方案時，如果能把差異轉成數量、比例或明確指標，我通常更容易做判斷。"},{"id":"Q078","text":"現有做法都能使用、但各有明顯限制時，我通常會想重新組合或發展另一種做法。"},{"id":"Q079","text":"資訊零散又複雜時，我常會用自己的話重新整理成一段說明，幫助自己掌握重點。"},{"id":"Q080","text":"只要整體方向正確，成果中的小差異通常不值得我再花時間逐一確認。"},{"id":"Q081","text":"如果一個問題值得深入，我可以連續花很長一段時間追下去，而不需要頻繁換成其他事情。"},{"id":"Q082","text":"要理解一個新的流程、工具或系統時，我通常希望親自操作一次，而不只閱讀說明。"},{"id":"Q083","text":"共同任務中有人卡住時，只要沒有直接影響我的部分，我通常不會特別去了解他遇到的困難。"},{"id":"Q084","text":"團隊面臨取捨時，比起等到每個人都完全同意，我更願意在資訊足夠後做出可執行的決定並承擔結果。"},{"id":"Q085","text":"當我的進度會影響別人的下一步時，我會主動對齊時間、需求與交接方式，而不是只完成自己的部分。"},{"id":"Q086","text":"有多種方法都能達成目標時，我通常希望先有人指定做法，照著執行會比自己決定更自在。"},{"id":"Q087","text":"只要失敗的代價可承受，我願意測試結果較不確定、但可能帶來更好成果的方案。"},{"id":"Q088","text":"比起長期維持熟悉而固定的內容，我更容易在工作內容定期出現新變化時保持投入。"},{"id":"Q089","text":"遇到一個自己不熟悉、但可能改善成果的新概念或工具時，我通常願意花時間把它弄懂。"},{"id":"Q090","text":"同時有多項任務、期限又不同時，比起直接從眼前最急的事情開始，我更傾向先排出整體順序與時間節點。"},{"id":"Q091","text":"進行到一半突然增加新的限制時，我通常能保留原本目標，同時快速調整達成目標的路徑。"},{"id":"Q092","text":"完成一件原本很容易的事情，通常不如攻下一個有難度、需要突破的目標讓我有滿足感。"},{"id":"Q093","text":"如果一個解釋聽起來合理，即使目前缺少可驗證的資料或紀錄，我通常也願意直接採用。"},{"id":"Q094","text":"如果長期做出的成果很少被看見或得到具體回應，即使事情本身能完成，我的投入感也容易下降。"},{"id":"Q095","text":"一個流程已經穩定可用後，我仍會留意其中的等待、重工或多餘步驟，看是否值得再改善。"},{"id":"Q096","text":"與其持續更換不同領域，我更希望在少數主題上累積到能理解細節與來龍去脈的程度。"},{"id":"Q097","text":"比起條件單純、步驟很少的任務，我更容易對需要同時考慮多個條件與限制的任務保持投入。"},{"id":"Q098","text":"當一件事需要在幾個彼此牽動的條件之間反覆取捨時，我通常不會因為複雜而很快失去興趣。"},{"id":"Q099","text":"只要目標清楚，我通常更喜歡條件單純、能直接完成的任務，而不是同時要顧很多因素的任務。"},{"id":"Q100","text":"接觸一個新的做法時，我通常不只想知道怎麼做，也會想理解背後的原理或架構。"},{"id":"Q101","text":"比起只記住具體步驟，我更容易在理解原理、模型或背後機制後保持投入。"},{"id":"Q102","text":"如果已經知道具體該怎麼做，背後的原理或概念通常不太影響我的投入感。"},{"id":"Q103","text":"當流程已經熟練、每天大致重複時，只要目標清楚，我仍能穩定投入其中。"},{"id":"Q104","text":"需要長時間反覆完成相同步驟時，我的投入感通常不會只因為內容重複而明顯下降。"},{"id":"Q105","text":"即使流程運作順利，只要長時間幾乎都在重複相同步驟，我通常會很快想離開這類任務。"},{"id":"Q106","text":"共同任務還沒有既定做法時，我通常願意參與決定流程、步驟或規則，而不只等方法確定後執行。"},{"id":"Q107","text":"比起把既定步驟穩定完成，我更容易被「決定該採用什麼方法與流程」的部分吸引。"},{"id":"Q108","text":"只要已有合理的方法，我通常更想把它可靠執行好，而不是參與重新設計做法。"},{"id":"Q109","text":"如果一類問題需要花很長時間累積知識後才能真正獨立處理，我通常願意接受這段學習期。"},{"id":"Q110","text":"比起很快就能上手但內容較固定的任務，我可以接受前期較難上手、之後能處理更專門問題的路線。"},{"id":"Q111","text":"如果一項工作需要很長的前期學習才能獨立完成，我通常會更偏好較快能掌握的內容。"},{"id":"Q112","text":"如果同一個問題反覆發生，我通常很難只照既有方式處理，而不去找它真正的原因。"},{"id":"Q113","text":"當事情暫時恢復正常後，如果原因還不清楚，我通常仍會想確認是哪個機制或條件造成問題。"},{"id":"Q114","text":"問題恢復正常後，只要沒有立即再發生，我通常不會再花時間追究原因。"},{"id":"Q115","text":"即使我負責的部分已經完成，我通常仍會想知道前後環節是否讓整體結果受到影響。"},{"id":"Q116","text":"比起只對自己的一小段負責，我更容易投入在能看見並影響整體結果的任務中。"},{"id":"Q117","text":"只要自己負責的部分符合要求，其他環節如何影響整體結果通常不是我會主動關注的重點。"}];
+const VERSION='3.0.0', MAPPING='career_question_mapping_v3.0.0', STORAGE_KEY='career-fit-test-v3.0.0';
+const PER_PAGE=7, TOTAL=QUESTIONS.length, PAGES=Math.ceil(TOTAL/PER_PAGE);
+const LABELS={1:'非常不同意',2:'不同意',3:'普通／不確定',4:'同意',5:'非常同意'};
+let state={name:'',answers:{},page:0,started_at:null};
+function safeLoad(){try{const raw=localStorage.getItem(STORAGE_KEY); if(raw){const x=JSON.parse(raw); if(x&&x.version===VERSION) state={...state,...x.state};}}catch(e){}}
+function safeSave(){try{localStorage.setItem(STORAGE_KEY,JSON.stringify({version:VERSION,state}));}catch(e){}}
+function safeClear(){try{localStorage.removeItem(STORAGE_KEY);}catch(e){}}
+function localIso(){const d=new Date(); const z=n=>String(n).padStart(2,'0'); const off=-d.getTimezoneOffset(); const sign=off>=0?'+':'-'; const oh=z(Math.floor(Math.abs(off)/60)), om=z(Math.abs(off)%60); return d.getFullYear()+'-'+z(d.getMonth()+1)+'-'+z(d.getDate())+'T'+z(d.getHours())+':'+z(d.getMinutes())+':'+z(d.getSeconds())+sign+oh+':'+om;}
+function fileStamp(){const d=new Date(); const z=n=>String(n).padStart(2,'0'); return d.getFullYear()+z(d.getMonth()+1)+z(d.getDate())+'_'+z(d.getHours())+z(d.getMinutes())+z(d.getSeconds());}
+function safeName(s){const invalid='<>:"/\\|?*'; let out=''; for(const ch of s.normalize('NFKC')){const code=ch.charCodeAt(0); out += (invalid.includes(ch)||code<32)?'_':ch;} out=out.trim().replace(/\s+/g,'_'); return out.slice(0,60)||'respondent';}
+function completedCount(){return Object.keys(state.answers).filter(k=>state.answers[k]>=1&&state.answers[k]<=5).length;}
+function showAlert(el,msg){el.textContent=msg; el.style.display='block';} function hideAlert(el){el.style.display='none';el.textContent='';}
+function render(){
+  const box=document.getElementById('questions'); box.innerHTML=''; const start=state.page*PER_PAGE, end=Math.min(start+PER_PAGE,TOTAL);
+  for(let i=start;i<end;i++){const q=QUESTIONS[i]; const div=document.createElement('div'); div.className='q'; div.dataset.qid=q.id; div.innerHTML='<div class="qid">'+q.id+'</div><div class="qtext"></div><div class="scale"></div>'; div.querySelector('.qtext').textContent=q.text; const scale=div.querySelector('.scale');
+    for(let n=1;n<=5;n++){const w=document.createElement('div');w.className='opt';const id=q.id+'_'+n; const input=document.createElement('input');input.type='radio';input.name=q.id;input.id=id;input.value=String(n);input.checked=state.answers[q.id]===n; input.addEventListener('change',()=>{state.answers[q.id]=n;safeSave();updateProgress();div.classList.remove('missing');}); const label=document.createElement('label');label.htmlFor=id;label.textContent=n+' · '+LABELS[n];w.append(input,label);scale.append(w);} box.append(div);}
+  document.getElementById('prevBtn').disabled=state.page===0; document.getElementById('nextBtn').textContent=state.page===PAGES-1?'完成測驗':'下一頁'; document.getElementById('pageText').textContent='第 '+(state.page+1)+' / '+PAGES+' 頁'; updateProgress(); window.scrollTo({top:0,behavior:'smooth'});
 }
-function defaultState(){return {questionnaire_version:VERSION,name:'',answers:{},currentPage:0,startedAt:null};}
-let state=defaultState();
-function safeLoad(){
-  try{const raw=localStorage.getItem(STORAGE_KEY); if(raw){const x=JSON.parse(raw); if(x.questionnaire_version===VERSION) state=Object.assign(defaultState(),x);}}
-  catch(e){storageAvailable=false; if(memoryStore) state=memoryStore;}
-}
-function safeSave(){
-  memoryStore=JSON.parse(JSON.stringify(state));
-  try{localStorage.setItem(STORAGE_KEY,JSON.stringify(state));}
-  catch(e){storageAvailable=false; document.getElementById('storageNote').classList.remove('hidden');}
-}
-function safeClear(){try{localStorage.removeItem(STORAGE_KEY);}catch(e){storageAvailable=false;} memoryStore=null;}
-function answeredCount(){return Object.keys(state.answers).filter(k=>Number.isInteger(state.answers[k])&&state.answers[k]>=1&&state.answers[k]<=5).length;}
-function setScreen(name){for(const id of ['startScreen','quizScreen','finishScreen'])document.getElementById(id).classList.add('hidden');document.getElementById(name).classList.remove('hidden');}
-function updateProgress(){const n=answeredCount();document.getElementById('progressText').textContent=`已完成 ${n} / ${QUESTIONS.length}`;document.getElementById('progressBar').style.width=`${n/QUESTIONS.length*100}%`;document.getElementById('pageText').textContent=`第 ${state.currentPage+1} / ${TOTAL_PAGES} 頁`;}
-function renderPage(markMissing=false){
-  state.currentPage=Math.max(0,Math.min(TOTAL_PAGES-1,state.currentPage)); safeSave();
-  const start=state.currentPage*PER_PAGE, pageQs=QUESTIONS.slice(start,start+PER_PAGE), box=document.getElementById('questions'); box.innerHTML='';
-  pageQs.forEach(q=>{
-    const fs=document.createElement('fieldset'); fs.className='q'+(markMissing&&!state.answers[q.question_id]?' missing':'');
-    const lg=document.createElement('legend'); lg.innerHTML=`<span class="qid">${q.question_id}</span>${escapeHtml(q.text)}`; fs.appendChild(lg);
-    const row=document.createElement('div'); row.className='likert';
-    for(let score=1;score<=5;score++){
-      const wrap=document.createElement('div'); wrap.className='choice'; const id=`${q.question_id}_${score}`;
-      const inp=document.createElement('input'); inp.type='radio'; inp.name=q.question_id; inp.id=id; inp.value=String(score); inp.checked=state.answers[q.question_id]===score;
-      inp.addEventListener('change',()=>{state.answers[q.question_id]=score;safeSave();updateProgress();fs.classList.remove('missing');document.getElementById('quizNotice').classList.add('hidden');});
-      const lab=document.createElement('label');lab.htmlFor=id;lab.textContent=String(score);lab.title=SCALE.labels[String(score)];wrap.append(inp,lab);row.appendChild(wrap);
-    }
-    fs.appendChild(row);box.appendChild(fs);
-  });
-  document.getElementById('prevBtn').disabled=state.currentPage===0;
-  document.getElementById('nextBtn').textContent=state.currentPage===TOTAL_PAGES-1?'完成測驗':'下一頁';
-  updateProgress();window.scrollTo({top:0,behavior:'smooth'});
-}
-function escapeHtml(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
-function startQuiz(){
-  const name=document.getElementById('nameInput').value.trim(); if(!name){document.getElementById('nameError').classList.remove('hidden');return;}
-  document.getElementById('nameError').classList.add('hidden'); state.name=name; if(!state.startedAt)state.startedAt=localISO(); safeSave(); setScreen('quizScreen'); renderPage(false);
-}
-function finishQuiz(){
-  const missing=QUESTIONS.filter(q=>!Number.isInteger(state.answers[q.question_id]));
-  if(missing.length){const first=QUESTIONS.findIndex(q=>q.question_id===missing[0].question_id);state.currentPage=Math.floor(first/PER_PAGE);safeSave();const n=document.getElementById('quizNotice');n.textContent=`還有 ${missing.length} 題尚未完成。`;n.classList.remove('hidden');renderPage(true);return;}
-  completedAt=localISO(); setScreen('finishScreen'); window.scrollTo({top:0,behavior:'smooth'});
-}
-function responseObject(){
-  if(!completedAt)completedAt=localISO();
-  return {schema_version:'career-response-1.0',questionnaire_id:'career-fit-test',questionnaire_version:VERSION,question_mapping_version:MAPPING_VERSION,language:'zh-TW',respondent:{name:state.name},started_at:state.startedAt,completed_at:completedAt,scale:SCALE,answers:QUESTIONS.map(q=>({question_id:q.question_id,question_text:q.text,score:state.answers[q.question_id]}))};
-}
-function safeFilePart(s){
-  let x=String(s).normalize('NFKC');
-  // Replace characters that are unsafe in common file systems without embedding control bytes in this HTML source.
-  x=x.replace(/[<>:"\/\\|?*]/g,'_');
-  x=Array.from(x).map(ch=>ch.charCodeAt(0)<32?'_':ch).join('');
-  x=x.replace(/[. ]+$/g,'').trim();
-  return (x||'respondent').slice(0,60);
-}
-function stamp(){const d=new Date(),p=n=>String(n).padStart(2,'0');return `${d.getFullYear()}${p(d.getMonth()+1)}${p(d.getDate())}_${p(d.getHours())}${p(d.getMinutes())}${p(d.getSeconds())}`;}
-function downloadJSON(){
-  const data=responseObject(), blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json;charset=utf-8'}), url=URL.createObjectURL(blob), a=document.createElement('a'); a.href=url;a.download=`career_test_${safeFilePart(state.name)}_${stamp()}.json`;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);
-}
-function resetAll(){if(!confirm('確定要清除目前作答並重新開始嗎？'))return;safeClear();state=defaultState();completedAt=null;document.getElementById('nameInput').value='';document.getElementById('quizNotice').classList.add('hidden');setScreen('startScreen');window.scrollTo({top:0,behavior:'smooth'});}
-
-document.getElementById('startBtn').addEventListener('click',startQuiz);
-document.getElementById('nameInput').addEventListener('keydown',e=>{if(e.key==='Enter')startQuiz();});
-document.getElementById('prevBtn').addEventListener('click',()=>{if(state.currentPage>0){state.currentPage--;renderPage(false);}});
-document.getElementById('nextBtn').addEventListener('click',()=>{if(state.currentPage<TOTAL_PAGES-1){state.currentPage++;renderPage(false);}else finishQuiz();});
-document.getElementById('downloadBtn').addEventListener('click',downloadJSON);
-document.getElementById('resetBtn').addEventListener('click',resetAll);
-
-safeLoad();
-document.getElementById('nameInput').value=state.name||'';
-if(!storageAvailable)document.getElementById('storageNote').classList.remove('hidden');
-if(state.name && state.startedAt)document.getElementById('startBtn').textContent=answeredCount()>0?'繼續上次作答':'開始測驗';
-</script>
-</body></html>
+function updateProgress(){const c=completedCount();document.getElementById('doneText').textContent='已完成 '+c+' / '+TOTAL;document.getElementById('bar').style.width=(c/TOTAL*100)+'%';}
+function startTest(){const inp=document.getElementById('name');const n=inp.value.trim();if(!n){showAlert(document.getElementById('startAlert'),'請先輸入姓名／暱稱。');inp.focus();return;}hideAlert(document.getElementById('startAlert'));state.name=n;if(!state.started_at)state.started_at=localIso();safeSave();document.getElementById('start').style.display='none';document.getElementById('done').style.display='none';document.getElementById('test').style.display='block';render();}
+function firstMissingIndex(){return QUESTIONS.findIndex(q=>!(state.answers[q.id]>=1&&state.answers[q.id]<=5));}
+function finish(){const miss=TOTAL-completedCount(); if(miss>0){showAlert(document.getElementById('missingAlert'),'還有 '+miss+' 題尚未完成。'); const idx=firstMissingIndex();state.page=Math.floor(idx/PER_PAGE);safeSave();render();setTimeout(()=>{const el=document.querySelector('[data-qid="'+QUESTIONS[idx].id+'"]');if(el){el.classList.add('missing');el.scrollIntoView({behavior:'smooth',block:'center'});}},120);return;} hideAlert(document.getElementById('missingAlert')); document.getElementById('test').style.display='none';document.getElementById('done').style.display='block';safeSave();window.scrollTo({top:0,behavior:'smooth'});}
+function buildResponse(){return {schema_version:'career-response-1.0',questionnaire_id:'career-fit-test',questionnaire_version:VERSION,question_mapping_version:MAPPING,language:'zh-TW',respondent:{name:state.name},started_at:state.started_at||localIso(),completed_at:localIso(),answers:QUESTIONS.map(q=>({question_id:q.id,question_text:q.text,score:state.answers[q.id]}))};}
+function download(){if(completedCount()!==TOTAL){document.getElementById('done').style.display='none';document.getElementById('test').style.display='block';finish();return;}const data=JSON.stringify(buildResponse(),null,2);const blob=new Blob([data],{type:'application/json;charset=utf-8'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='career_test_'+safeName(state.name)+'_'+fileStamp()+'.json';document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);}
+function resetAll(){if(!confirm('確定要清除目前作答並重新開始嗎？'))return;safeClear();state={name:'',answers:{},page:0,started_at:null};document.getElementById('name').value='';document.getElementById('test').style.display='none';document.getElementById('done').style.display='none';document.getElementById('start').style.display='block';hideAlert(document.getElementById('missingAlert'));window.scrollTo({top:0,behavior:'smooth'});}
+document.getElementById('startBtn').addEventListener('click',startTest);document.getElementById('name').addEventListener('keydown',e=>{if(e.key==='Enter')startTest();});document.getElementById('prevBtn').addEventListener('click',()=>{if(state.page>0){state.page--;safeSave();render();}});document.getElementById('nextBtn').addEventListener('click',()=>{hideAlert(document.getElementById('missingAlert'));if(state.page<PAGES-1){state.page++;safeSave();render();}else finish();});document.getElementById('downloadBtn').addEventListener('click',download);document.getElementById('restartBtn').addEventListener('click',resetAll);document.getElementById('resetTop').addEventListener('click',resetAll);
+safeLoad(); if(state.name)document.getElementById('name').value=state.name; if(state.started_at&&state.name){document.getElementById('start').style.display='none';document.getElementById('test').style.display='block';render();}
+</script></body></html>
